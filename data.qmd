@@ -1,14 +1,12 @@
 ---
 title: Data
-description: We describe the sources of our data and the cleaning process. The data was sourced from the U.S. Department of Education (https://collegescorecard.ed.gov/data/).
+description: Sources of the data and the data cleaning process.
 toc: true
 draft: false
 ---
 
 ![](images/Department_of_education.png)
 
-
-This comes from the file `data.qmd`.
 
 ## Overview of the College Scorecard
 
@@ -28,7 +26,7 @@ The goal of this dataset was to create a federal tool that offers comprehensive 
 
 ## Initial Analysis on Flaws and Limitations
 
-Although serving as a comprehensive and centralized federal postsecondary information system, the College Scorecard still contains flaws that undermine its overall effectiveness:
+Although serving as a centralized federal postsecondary information system, the College Scorecard contains flaws that undermine its overall effectiveness:
 
 - **Lack of Qualitative Information:** The Scorecard focuses primarily on quantitative variables, particularly monetary measures of value. By reducing the measure of an institution’s worth to numerical factors, the Scorecard does not fully encapsulate an institution’s mission or character. This emphasis on financial metrics strips away the nuances of an institution and can lead to an inaccurate portrayal of the college experience.
 
@@ -48,9 +46,9 @@ Institution-level data files derived from the College Scorecard were the focal p
 - **Admissions and Testing:** Acceptance Rate, Average SAT Scores
 - **Average cost and net price contingent on financial bracket:** Average Cost Of Attendance, Average Net Price Based on Income Level (Both Private and Public Universities)
 - **Racial composition:** Percentage Undergraduate White, Black, Hispanic, and Asian
-- **Financial aid and loan:** Percentage Receiving Loan from Federal Gov Each Year, Median Loan Debt for Students who Leave the University that Year
-- **Completion rate:** Completion rate for White, Black, Hispanic, and Asian Student Populations
-- **Earnings after college:** Mean earnings from enrollment to 6, 7, 8, 9, 10 Years After College
+- **Financial aid and loan:** Percentage Receiving Loan from Federal Gov Each Year, Median Loan Debt for Students Who Leave the University that Year
+- **Completion rate:** Completion Rate for White, Black, Hispanic, and Asian Student Populations
+- **Earnings after college:** Mean Earnings From Enrollment to 6, 7, 8, 9, 10 Years After College
 
 | **Main Variables**    | **Description**                                                                                   | **Data Type**         |
 |-----------------------|---------------------------------------------------------------------------------------------------|-----------------------|
@@ -75,9 +73,9 @@ source("scripts/load_and_clean_data.R")
 
 The original loaded education_cohort_data was *6484 rows x 3305 columns*. The cleaned dataset is *527 rows x 47 columns*. 
 
-The **College Scorecard Data Dictionary** was used to parse through abbreviated terminology and retain all relevant data values. Columns were renamed to improve readability. Data entries missing key values, including acceptance rate, tuition, racial demographics, median loan amount, percentage receiving loan, median earnings after college, and completion rates, were removed. Data entries with the value "PS", for privacy suppressed data, were removed for consistency. 
-
-All `med_loan_#` variables, initially in char format, were changed into numeric values. The `Avg_Mean_earning` variable was created and added as a separate column, calculated by averaging all average mean earnings from Years 6-10 for each corresponding row.  
+The **College Scorecard Data Dictionary** was used to parse through abbreviated terminology and retain all relevant data values. Columns were renamed to improve readability. Data entries missing key values, including acceptance rate, tuition, racial demographics, median loan amount, percentage receiving loan, median earnings after college, and completion rates, were removed. Data entries with the value *"PS"*, for privacy suppressed data, were removed for consistency. 
+- All `med_loan_#` variables, initially in char format, were changed into numeric values. 
+- The `Avg_Mean_earning` variable was created and added as a separate column, calculated by averaging all average mean earnings from Years 6-10 for each corresponding row.  
 
 *Technical documentation on the data can be found [here](https://collegescorecard.ed.gov/assets/InstitutionDataDocumentation.pdf).*
 
@@ -113,45 +111,3 @@ education_cohort_data <- education_cohort_data |>
   mutate(Avg_Mean_earning = mean(c_across(starts_with("Mean_earnings_After_")), na.rm = TRUE)) |>
   ungroup()
 ```
-
-#### NCES SAT Score Data
-*NCES SAT Score Data can be found [here](/scripts/new_load_and_clean_data.R).*
-```{r eval=FALSE}
-source("scripts/new_load_and_clean.R")
-```
-
-Columns were renamed for readibility, and filtered down to include relevant SAT math and reading scores. The rows pertaining to income bracket were kept and renamed for readibility.
-
-
-```{r eval=FALSE}
-# Condensed description of data cleaning process
-
-# Specifying columns to keep based on the indices, particularly columns related to SAT scores
-table_col_indices <- c(1, 16, 17)
-
-# Renaming the selected columns by their indices
-colnames(SAT_data) <- c(
-  "Income_Bracket",
-  "Critical_Reading_Score",  # 16th column
-  "Math_Score"               # 17th column
-)
-
-# Selecting rows 88 to 97 inclusive that pertain to student income brackets 
-row_indices <- 88:97
-SAT_data <- SAT_data[row_indices, ]
-
-# Renaming rows based on their index positions (row indices)
-row_names <- c(
-  "Less_than_$20000",
-  "$20000_to_$40000",
-  ...
-)
-
-```
-
-
-
-
-
-
-

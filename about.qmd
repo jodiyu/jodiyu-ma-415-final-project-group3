@@ -17,30 +17,17 @@ about:
 ---
 
 
-This comes from the file `about.qmd`.
 
-This is a website for the final project for MA415 Data Science with R by Team 3.
-The members of this team are below.
+This is a website for the final project for MA415 Data Science with R.
 
-## Jiacheng Li
 
-Jiacheng Li is a junior at Boston University studying Mathematics & Computer Science. You guys can call me Seven (which is my English name) as well.
 
-## Jodi Yu
 
-Jodi Yu is a junior at Boston University studying Mathematics and Computer Science. 
 
-## Xinlei Cheng
 
-Xinlei Cheng is a senior at Boston University studying Computer Science joint major with Economics.
 
-## Sohail Mohammed
 
-Sohail Mohammed is a senior at Boston University studying Data Science.  
 
-## Vasundhra Maharajan
-
-Vasundhra Maharajan (Vasu) is a senior at Boston University studying Biology on the pre-med track. 
 
 
 <!-- Please leave in the information below -->
