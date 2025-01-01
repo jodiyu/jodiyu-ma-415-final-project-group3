@@ -1,0 +1,8 @@
+---
+title: "MA 415 Final Project"
+page-layout: full
+title-block-banner: true
+---
+
+![](images/Earning&Education.jpg)
+

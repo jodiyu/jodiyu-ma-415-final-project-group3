@@ -1,0 +1,19 @@
+project:
+  type: website
+  execute-dir: project
+  resources: scripts
+
+website:
+  title: "Racial Disparity in Higher Education"
+  navbar:
+    right:
+      - big_picture.qmd
+      - analysis.qmd
+      - data.qmd
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+
+
+
